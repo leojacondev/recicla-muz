@@ -51,9 +51,12 @@ function RootLayoutNav() {
 
   return (
     <NavigationThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Header onToggleTheme={toggleTheme} />
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack
+        screenOptions={{
+          header: () => <Header onToggleTheme={toggleTheme} />,
+        }}
+      >
+        <Stack.Screen name="index" />
         <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
       </Stack>
     </NavigationThemeProvider>

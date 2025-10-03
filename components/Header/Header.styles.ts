@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#4caf50',
-    paddingTop: 50,
-    paddingBottom: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
     paddingHorizontal: 16,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -16,12 +16,16 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    maxWidth: 1200,
+    marginHorizontal: 'auto',
+    width: '100%',
   },
   menuButton: {
-    padding: 8,
+    padding: 6,
+    width: 40,
   },
   title: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#fff',
     flex: 1,
@@ -31,7 +35,8 @@ export const styles = StyleSheet.create({
     color: '#fff',
   },
   themeButton: {
-    padding: 8,
+    padding: 6,
+    width: 40,
   },
   modalOverlay: {
     flex: 1,
