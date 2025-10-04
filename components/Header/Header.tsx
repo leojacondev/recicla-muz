@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Modal, Pressable, Text, TouchableOpacity, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { styles } from './Header.styles';
 
 interface HeaderProps {
@@ -14,6 +15,7 @@ export default function Header({ onToggleTheme }: HeaderProps) {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
   const router = useRouter();
+  const insets = useSafeAreaInsets();
 
   const handleMenuItemPress = (route: string) => {
     setMenuVisible(false);
@@ -21,7 +23,7 @@ export default function Header({ onToggleTheme }: HeaderProps) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: insets.top + 10 }]}>
       <View style={styles.content}>
         <TouchableOpacity
           onPress={() => setMenuVisible(true)}
@@ -54,7 +56,7 @@ export default function Header({ onToggleTheme }: HeaderProps) {
           style={styles.modalOverlay}
           onPress={() => setMenuVisible(false)}
         >
-          <View style={[styles.menuContainer, isDark && styles.menuContainerDark]}>
+          <View style={[styles.menuContainer, isDark && styles.menuContainerDark, { paddingTop: insets.top + 20 }]}>
             <TouchableOpacity
               style={styles.closeButton}
               onPress={() => setMenuVisible(false)}

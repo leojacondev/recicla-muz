@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#4caf50',
-    paddingTop: 10,
     paddingBottom: 10,
     paddingHorizontal: 16,
     shadowColor: '#000',
@@ -46,7 +45,6 @@ export const styles = StyleSheet.create({
     width: '75%',
     height: '100%',
     backgroundColor: '#fff',
-    paddingTop: 50,
     paddingHorizontal: 20,
   },
   menuContainerDark: {
