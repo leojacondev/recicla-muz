@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { View, Text, TouchableOpacity, Modal, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { styles } from './Header.styles';
 import { useColorScheme } from '@/components/useColorScheme';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import { useState } from 'react';
+import { Modal, Pressable, Text, TouchableOpacity, View } from 'react-native';
+import { styles } from './Header.styles';
 
 interface HeaderProps {
   onToggleTheme?: () => void;
@@ -12,6 +13,12 @@ export default function Header({ onToggleTheme }: HeaderProps) {
   const [menuVisible, setMenuVisible] = useState(false);
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
+  const router = useRouter();
+
+  const handleMenuItemPress = (route: string) => {
+    setMenuVisible(false);
+    router.push(route as any);
+  };
 
   return (
     <View style={styles.container}>
@@ -56,12 +63,18 @@ export default function Header({ onToggleTheme }: HeaderProps) {
             </TouchableOpacity>
 
             <View style={styles.menuItems}>
-              <TouchableOpacity style={styles.menuItem}>
+              <TouchableOpacity 
+                style={styles.menuItem}
+                onPress={() => handleMenuItemPress('/')}
+              >
                 <Ionicons name="home-outline" size={24} color={isDark ? '#fff' : '#2e7d32'} />
                 <Text style={[styles.menuItemText, isDark && styles.menuItemTextDark]}>Início</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.menuItem}>
+              <TouchableOpacity 
+                style={styles.menuItem}
+                onPress={() => handleMenuItemPress('/map')}
+              >
                 <Ionicons name="map-outline" size={24} color={isDark ? '#fff' : '#2e7d32'} />
                 <Text style={[styles.menuItemText, isDark && styles.menuItemTextDark]}>Mapa</Text>
               </TouchableOpacity>
