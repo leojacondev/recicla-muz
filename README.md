@@ -136,7 +136,7 @@ reciclamuz/
 
 📄 Licença
 
-Este projeto foi desenvolvido para fins acadêmicos.
+Este projeto foi desenvolvido para fins acadêmicos. 
 
 
 
