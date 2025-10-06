@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import { View, Text, TouchableOpacity, Modal, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { styles } from './Header.styles';
 import { useColorScheme } from '@/components/useColorScheme';
+import { Ionicons } from '@expo/vector-icons';
+import { usePathname, useRouter } from 'expo-router';
+import { useState } from 'react';
+import { Modal, Pressable, Text, TouchableOpacity, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { styles } from './Header.styles';
 
 interface HeaderProps {
   onToggleTheme?: () => void;
@@ -12,9 +14,22 @@ export default function Header({ onToggleTheme }: HeaderProps) {
   const [menuVisible, setMenuVisible] = useState(false);
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
+  const router = useRouter();
+  const pathname = usePathname();
+  const insets = useSafeAreaInsets();
+
+  const handleMenuItemPress = (route: string) => {
+    setMenuVisible(false);
+    
+    if (pathname === route) {
+      return;
+    }
+    
+    router.push(route as any);
+  };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: insets.top + 10 }]}>
       <View style={styles.content}>
         <TouchableOpacity
           onPress={() => setMenuVisible(true)}
@@ -47,7 +62,7 @@ export default function Header({ onToggleTheme }: HeaderProps) {
           style={styles.modalOverlay}
           onPress={() => setMenuVisible(false)}
         >
-          <View style={[styles.menuContainer, isDark && styles.menuContainerDark]}>
+          <View style={[styles.menuContainer, isDark && styles.menuContainerDark, { paddingTop: insets.top + 20 }]}>
             <TouchableOpacity
               style={styles.closeButton}
               onPress={() => setMenuVisible(false)}
@@ -56,12 +71,18 @@ export default function Header({ onToggleTheme }: HeaderProps) {
             </TouchableOpacity>
 
             <View style={styles.menuItems}>
-              <TouchableOpacity style={styles.menuItem}>
+              <TouchableOpacity 
+                style={styles.menuItem}
+                onPress={() => handleMenuItemPress('/')}
+              >
                 <Ionicons name="home-outline" size={24} color={isDark ? '#fff' : '#2e7d32'} />
                 <Text style={[styles.menuItemText, isDark && styles.menuItemTextDark]}>Início</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.menuItem}>
+              <TouchableOpacity 
+                style={styles.menuItem}
+                onPress={() => handleMenuItemPress('/map')}
+              >
                 <Ionicons name="map-outline" size={24} color={isDark ? '#fff' : '#2e7d32'} />
                 <Text style={[styles.menuItemText, isDark && styles.menuItemTextDark]}>Mapa</Text>
               </TouchableOpacity>

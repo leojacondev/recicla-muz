@@ -43,3 +43,6 @@ yarn-error.*
 #vscode
 .vscode/
 .cursor/
+
+#package-lock.json
+package-lock.json
