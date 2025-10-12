@@ -122,6 +122,7 @@ export class CollectionPointsExample {
     if (points.length === 0) return;
 
     const firstPoint = points[0];
+    const secondPoint = points[1];
 
     await this.storage.addRating(firstPoint.id, {
       userId: 'user1',
@@ -137,6 +138,24 @@ export class CollectionPointsExample {
 
     await this.storage.addRating(firstPoint.id, {
       userId: 'user3',
+      rating: 5,
+      comment: 'Perfeito! Fácil acesso e sempre limpo.'
+    });
+
+    await this.storage.addRating(secondPoint.id, {
+      userId: 'user4',
+      rating: 3,
+      comment: 'Médio, mas poderia ser melhor.'
+    });
+
+    await this.storage.addRating(secondPoint.id, {
+      userId: 'user5',
+      rating: 4,
+      comment: 'Bom local, mas poderia ser melhor.'
+    });
+
+    await this.storage.addRating(secondPoint.id, {
+      userId: 'user6',
       rating: 5,
       comment: 'Perfeito! Fácil acesso e sempre limpo.'
     });
@@ -167,25 +186,6 @@ export class CollectionPointsExample {
       }
     });
     console.log(`📝 Informações atualizadas`);
-  }
-
-
-  async getStatisticsExample() {
-    console.log('\n📊 Demonstrando estatísticas...');
-
-    const stats = await this.storage.getStatistics();
-    console.log('Estatísticas dos pontos de coleta:');
-    console.log(`- Total de pontos: ${stats.totalPoints}`);
-    console.log(`- Pontos ativos: ${stats.activePoints}`);
-    console.log(`- Avaliação média geral: ${stats.averageRating}/5`);
-    
-    console.log('\nTipos de resíduo mais comuns:');
-    stats.wasteTypeStats
-      .sort((a, b) => b.count - a.count)
-      .slice(0, 5)
-      .forEach(stat => {
-        console.log(`- ${stat.type}: ${stat.count} pontos`);
-      });
   }
 
 
