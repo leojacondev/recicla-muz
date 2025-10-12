@@ -1,8 +1,11 @@
 import { Text } from '@/components/Themed';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
+import { useRouter } from 'expo-router';
 import { styles } from './MapScreen.styles';
+import { CollectionPointsStorage, CollectionPoint, WasteTypeUtils } from '@/services';
+import { runCollectionPointsExample } from '@/services/examples/CollectionPointsExample';
 
 interface City {
   name: string;
@@ -27,14 +30,38 @@ const MUZAMBINHO_CITY: City = {
 export default function MapScreen({ city = MUZAMBINHO_CITY }: MapScreenProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [collectionPoints, setCollectionPoints] = useState<CollectionPoint[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    const loadCollectionPoints = async () => {
+      try {
+        setLoading(true);
+        const storage = CollectionPointsStorage.getInstance();
+        const points = await storage.getAll();
+        
+        // Se não há pontos, criar alguns de exemplo
+        if (points.length === 0) {
+          await runCollectionPointsExample();
+          const newPoints = await storage.getAll();
+          setCollectionPoints(newPoints);
+        } else {
+          setCollectionPoints(points);
+        }
+      } catch (err) {
+        console.error('Erro ao carregar pontos de coleta:', err);
+        setError('Erro ao carregar pontos de coleta');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    return () => clearTimeout(timer);
+    loadCollectionPoints();
   }, []);
+
+  const handleViewPoint = (pointId: string) => {
+    router.push(`/collection-point/${pointId}` as any);
+  };
 
   if (loading) {
     return (
@@ -74,12 +101,29 @@ export default function MapScreen({ city = MUZAMBINHO_CITY }: MapScreenProps) {
         showsCompass={true}
         showsScale={true}
         mapType="standard"
-      />
+      >
+        {collectionPoints.map((point) => (
+            <Marker
+              key={point.id}
+              coordinate={{
+                latitude: point.coordinates.latitude,
+                longitude: point.coordinates.longitude,
+              }}
+              pinColor="green"
+              title={point.name}
+              description={`🔍 Toque para ver mais detalhes`}
+              onCalloutPress={() => handleViewPoint(point.id)}
+            />
+        ))}
+      </MapView>
       
       <View style={styles.infoOverlay}>
         <Text style={styles.cityName}>📍 {city.name}</Text>
         <Text style={styles.coordinates}>
           {city.latitude.toFixed(6)}, {city.longitude.toFixed(6)}
+        </Text>
+        <Text style={styles.pointsCount}>
+          {collectionPoints.length} pontos de coleta
         </Text>
       </View>
     </View>

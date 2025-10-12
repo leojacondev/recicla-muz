@@ -91,4 +91,57 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: '#666',
   },
+  pointsCount: {
+    fontSize: 12,
+    color: '#4CAF50',
+    fontWeight: '600',
+    marginTop: 5,
+  },
+  callout: {
+    width: 250,
+    minHeight: 120,
+  },
+  calloutContainer: {
+    padding: 12,
+    alignItems: 'flex-start',
+  },
+  calloutTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#2d5016',
+    marginBottom: 6,
+  },
+  calloutDescription: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 8,
+    lineHeight: 18,
+  },
+  wasteTypesRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  wasteTypeEmoji: {
+    fontSize: 18,
+    marginRight: 4,
+  },
+  moreTypes: {
+    fontSize: 12,
+    color: '#666',
+    fontWeight: '600',
+  },
+  viewButton: {
+    backgroundColor: '#4CAF50',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+    alignSelf: 'stretch',
+    alignItems: 'center',
+  },
+  viewButtonText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: '600',
+  },
 });
