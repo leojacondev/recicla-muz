@@ -46,3 +46,9 @@ yarn-error.*
 
 #package-lock.json
 package-lock.json
+
+# Claude AI files
+.claude/
+*.claude.md
+.claudesync/
+claude_project.json
