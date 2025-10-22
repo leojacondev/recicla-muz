@@ -2,11 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { GoogleButton, GitHubButton } from '@/components/LoginScreen';
 
 export default function LoginScreen() {
   const router = useRouter();
   const { isAuthenticated, isLoading, signInWithGoogle, signInWithGitHub } = useAuth();
+  const { isDark } = useTheme();
   const [loadingGoogle, setLoadingGoogle] = React.useState(false);
   const [loadingGitHub, setLoadingGitHub] = React.useState(false);
 
@@ -39,25 +41,35 @@ export default function LoginScreen() {
     }
   };
 
+  const containerStyle = [
+    styles.container,
+    isDark && styles.containerDark
+  ];
+
+  const textStyle = (baseStyle: any) => [
+    baseStyle,
+    isDark && styles.textDark
+  ];
+
   if (isLoading) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.loadingText}>Carregando...</Text>
+      <View style={containerStyle}>
+        <Text style={textStyle(styles.loadingText)}>Carregando...</Text>
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <View style={containerStyle}>
       <View style={styles.header}>
-        <Text style={styles.title}>ReciclaMuz</Text>
-        <Text style={styles.subtitle}>
+        <Text style={textStyle(styles.title)}>ReciclaMuz</Text>
+        <Text style={textStyle(styles.subtitle)}>
           Bem-vindo ao app de reciclagem de Muzambinho
         </Text>
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.instructions}>
+        <Text style={textStyle(styles.instructions)}>
           Faça login para acessar o mapa de pontos de coleta
         </Text>
 
@@ -75,18 +87,18 @@ export default function LoginScreen() {
         </View>
 
         <View style={styles.divider}>
-          <View style={styles.dividerLine} />
-          <Text style={styles.dividerText}>ou</Text>
-          <View style={styles.dividerLine} />
+          <View style={[styles.dividerLine, isDark && styles.dividerLineDark]} />
+          <Text style={textStyle(styles.dividerText)}>ou</Text>
+          <View style={[styles.dividerLine, isDark && styles.dividerLineDark]} />
         </View>
 
-        <Text style={styles.guestText}>
+        <Text style={textStyle(styles.guestText)}>
           Continue como visitante para explorar o app
         </Text>
       </View>
 
       <View style={styles.footer}>
-        <Text style={styles.footerText}>
+        <Text style={textStyle(styles.footerText)}>
           Ao continuar, você concorda com nossos Termos de Serviço e Política de Privacidade
         </Text>
       </View>
@@ -100,6 +112,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 20,
     justifyContent: 'space-between',
+  },
+  containerDark: {
+    backgroundColor: '#1a1a1a',
+  },
+  textDark: {
+    color: '#e0e0e0',
   },
   header: {
     marginTop: 60,
@@ -142,6 +160,9 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 1,
     backgroundColor: '#e0e0e0',
+  },
+  dividerLineDark: {
+    backgroundColor: '#444',
   },
   dividerText: {
     marginHorizontal: 16,
