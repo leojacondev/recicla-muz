@@ -26,6 +26,7 @@ interface AuthContextType {
   signInWithGoogle: () => Promise<void>;
   signInWithGitHub: () => Promise<void>;
   signOut: () => Promise<void>;
+  refreshSession: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -174,7 +175,50 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const refreshSession = async () => {
+    try {
+      const session = await secureStorage.loadSession();
+
+      if (!session) {
+        console.log('⚠️ Nenhuma sessão para renovar');
+        return;
+      }
+
+      // Verificar se a sessão está próxima de expirar (< 24 horas)
+      const timeUntilExpiry = session.expiresAt - Date.now();
+      const oneDayInMs = 24 * 60 * 60 * 1000;
+
+      if (timeUntilExpiry < oneDayInMs) {
+        console.log('🔄 Renovando sessão...');
+
+        // Gerar novo token (em produção, isso seria feito via API)
+        const newToken = `${session.provider}_refreshed_${Date.now()}`;
+
+        // Salvar nova sessão
+        await secureStorage.saveSession(session.user, newToken);
+        console.log('✅ Sessão renovada com sucesso');
+      } else {
+        console.log('✓ Sessão ainda válida');
+      }
+    } catch (error) {
+      console.error('❌ Erro ao renovar sessão:', error);
+      throw error;
+    }
+  };
+
   const isAuthenticated = !!user;
+
+  // Verificar e renovar sessão periodicamente
+  useEffect(() => {
+    if (!user) return;
+
+    // Verificar a cada 1 hora
+    const intervalId = setInterval(() => {
+      refreshSession();
+    }, 60 * 60 * 1000);
+
+    return () => clearInterval(intervalId);
+  }, [user]);
 
   return (
     <AuthContext.Provider
@@ -185,6 +229,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         signInWithGoogle,
         signInWithGitHub,
         signOut,
+        refreshSession,
       }}
     >
       {children}
