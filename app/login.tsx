@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAuth } from '@/contexts/AuthContext';
+import { GoogleButton, GitHubButton } from '@/components/LoginScreen';
 
 export default function LoginScreen() {
   const router = useRouter();
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, signInWithGoogle, signInWithGitHub } = useAuth();
+  const [loadingGoogle, setLoadingGoogle] = React.useState(false);
+  const [loadingGitHub, setLoadingGitHub] = React.useState(false);
 
   // Redireciona se já estiver autenticado
   React.useEffect(() => {
@@ -13,6 +16,28 @@ export default function LoginScreen() {
       router.replace('/');
     }
   }, [isAuthenticated]);
+
+  const handleGoogleLogin = async () => {
+    try {
+      setLoadingGoogle(true);
+      await signInWithGoogle();
+    } catch (error) {
+      console.error('Erro no login com Google:', error);
+    } finally {
+      setLoadingGoogle(false);
+    }
+  };
+
+  const handleGitHubLogin = async () => {
+    try {
+      setLoadingGitHub(true);
+      await signInWithGitHub();
+    } catch (error) {
+      console.error('Erro no login com GitHub:', error);
+    } finally {
+      setLoadingGitHub(false);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -36,10 +61,28 @@ export default function LoginScreen() {
           Faça login para acessar o mapa de pontos de coleta
         </Text>
 
-        {/* Botões OAuth serão adicionados aqui */}
         <View style={styles.buttonsContainer}>
-          <Text style={styles.placeholder}>Botões OAuth em breve...</Text>
+          <GoogleButton
+            onPress={handleGoogleLogin}
+            loading={loadingGoogle}
+            disabled={loadingGitHub}
+          />
+          <GitHubButton
+            onPress={handleGitHubLogin}
+            loading={loadingGitHub}
+            disabled={loadingGoogle}
+          />
         </View>
+
+        <View style={styles.divider}>
+          <View style={styles.dividerLine} />
+          <Text style={styles.dividerText}>ou</Text>
+          <View style={styles.dividerLine} />
+        </View>
+
+        <Text style={styles.guestText}>
+          Continue como visitante para explorar o app
+        </Text>
       </View>
 
       <View style={styles.footer}>
@@ -87,11 +130,29 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     width: '100%',
     maxWidth: 400,
+    paddingHorizontal: 20,
   },
-  placeholder: {
-    textAlign: 'center',
+  divider: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 24,
+    paddingHorizontal: 20,
+  },
+  dividerLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: '#e0e0e0',
+  },
+  dividerText: {
+    marginHorizontal: 16,
     color: '#999',
     fontSize: 14,
+  },
+  guestText: {
+    textAlign: 'center',
+    color: '#666',
+    fontSize: 14,
+    fontStyle: 'italic',
   },
   loadingText: {
     fontSize: 18,
