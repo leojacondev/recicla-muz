@@ -109,7 +109,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       };
 
       setUser(mockUser);
-      // TODO: Salvar no AsyncStorage
+
+      // Salvar sessão no armazenamento seguro
+      const mockToken = `google_token_${Date.now()}`;
+      await secureStorage.saveSession(mockUser, mockToken);
+      console.log('✅ Login com Google realizado e sessão salva');
 
     } catch (error) {
       console.error('Erro no login com Google:', error);
@@ -142,7 +146,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       };
 
       setUser(mockUser);
-      // TODO: Salvar no AsyncStorage
+
+      // Salvar sessão no armazenamento seguro
+      const mockToken = `github_token_${Date.now()}`;
+      await secureStorage.saveSession(mockUser, mockToken);
+      console.log('✅ Login com GitHub realizado e sessão salva');
 
     } catch (error) {
       console.error('Erro no login com GitHub:', error);
