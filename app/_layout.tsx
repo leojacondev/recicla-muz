@@ -61,6 +61,17 @@ function RootLayoutNav() {
       >
         <Stack.Screen name="index" />
         <Stack.Screen name="map" options={{ title: 'Mapa' }} />
+        <Stack.Screen
+          name="login"
+          options={{
+            title: 'Login',
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name="profile"
+          options={{ title: 'Perfil' }}
+        />
       </Stack>
     </NavigationThemeProvider>
   );
