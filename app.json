@@ -34,6 +34,16 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "oauth": {
+        "google": {
+          "redirectUri": "reciclamuz://auth/google"
+        },
+        "github": {
+          "redirectUri": "reciclamuz://auth/github"
+        }
+      }
     }
   }
 }

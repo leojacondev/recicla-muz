@@ -8,6 +8,7 @@ import 'react-native-reanimated';
 
 import Header from '@/components/Header';
 import { ThemeProvider, useTheme } from '@/contexts/ThemeContext';
+import { AuthProvider } from '@/contexts/AuthContext';
 
 export {
   ErrorBoundary
@@ -41,7 +42,9 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider>
-      <RootLayoutNav />
+      <AuthProvider>
+        <RootLayoutNav />
+      </AuthProvider>
     </ThemeProvider>
   );
 }
@@ -58,6 +61,17 @@ function RootLayoutNav() {
       >
         <Stack.Screen name="index" />
         <Stack.Screen name="map" options={{ title: 'Mapa' }} />
+        <Stack.Screen
+          name="login"
+          options={{
+            title: 'Login',
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name="profile"
+          options={{ title: 'Perfil' }}
+        />
       </Stack>
     </NavigationThemeProvider>
   );
