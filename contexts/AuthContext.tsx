@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import * as AuthSession from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
+import { secureStorage } from '@/services/SecureStorage';
 
 // Completar warm-up do navegador para melhor UX em OAuth
 WebBrowser.maybeCompleteAuthSession();
@@ -59,11 +60,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const loadStoredSession = async () => {
     try {
       setIsLoading(true);
-      // TODO: Implementar carregamento de sessão do AsyncStorage
-      // Por enquanto, apenas simula carregamento
-      await new Promise(resolve => setTimeout(resolve, 500));
+      const session = await secureStorage.loadSession();
+
+      if (session) {
+        console.log('✅ Sessão restaurada:', session.user.name);
+        setUser(session.user);
+      } else {
+        console.log('ℹ️ Nenhuma sessão encontrada');
+      }
     } catch (error) {
-      console.error('Erro ao carregar sessão:', error);
+      console.error('❌ Erro ao carregar sessão:', error);
+      await secureStorage.clearSession();
     } finally {
       setIsLoading(false);
     }
@@ -148,10 +155,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = async () => {
     try {
       setIsLoading(true);
-      // TODO: Limpar AsyncStorage
+      await secureStorage.clearSession();
       setUser(null);
+      console.log('✅ Logout realizado e sessão limpa');
     } catch (error) {
-      console.error('Erro ao fazer logout:', error);
+      console.error('❌ Erro ao fazer logout:', error);
       throw error;
     } finally {
       setIsLoading(false);
