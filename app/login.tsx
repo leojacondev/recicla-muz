@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { GoogleButton, GitHubButton } from '@/components/LoginScreen';
+import { GoogleButton, GitHubButton, ErrorAlert } from '@/components/LoginScreen';
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -11,6 +11,7 @@ export default function LoginScreen() {
   const { isDark } = useTheme();
   const [loadingGoogle, setLoadingGoogle] = React.useState(false);
   const [loadingGitHub, setLoadingGitHub] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
 
   // Redireciona se já estiver autenticado
   React.useEffect(() => {
@@ -21,10 +22,12 @@ export default function LoginScreen() {
 
   const handleGoogleLogin = async () => {
     try {
+      setError(null);
       setLoadingGoogle(true);
       await signInWithGoogle();
     } catch (error) {
       console.error('Erro no login com Google:', error);
+      setError('Falha ao fazer login com Google. Tente novamente.');
     } finally {
       setLoadingGoogle(false);
     }
@@ -32,10 +35,12 @@ export default function LoginScreen() {
 
   const handleGitHubLogin = async () => {
     try {
+      setError(null);
       setLoadingGitHub(true);
       await signInWithGitHub();
     } catch (error) {
       console.error('Erro no login com GitHub:', error);
+      setError('Falha ao fazer login com GitHub. Tente novamente.');
     } finally {
       setLoadingGitHub(false);
     }
@@ -72,6 +77,8 @@ export default function LoginScreen() {
         <Text style={textStyle(styles.instructions)}>
           Faça login para acessar o mapa de pontos de coleta
         </Text>
+
+        {error && <ErrorAlert message={error} onDismiss={() => setError(null)} />}
 
         <View style={styles.buttonsContainer}>
           <GoogleButton
