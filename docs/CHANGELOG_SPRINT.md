@@ -284,7 +284,369 @@ Avisos npm sobre versão do Node (20.18.1 vs 20.19.4) - não impedem funcionamen
 
 ## 🗓️ DIA 2 - 22 de outubro de 2025
 
-**Status**: ⏳ Aguardando início
+**Foco**: Interface de Login e Fluxo OAuth
+
+### ✅ Commits Realizados (11)
+
+#### Commit 1: `07cc055` - Estrutura Base da Tela de Login
+**Tipo**: `feat(ui)`
+**Título**: Create base login screen structure
+
+**Mudanças**:
+- ✅ Criada rota `/app/login.tsx`
+- ✅ Criada pasta `/components/LoginScreen/`
+- ✅ Estrutura base do componente de login
+- ✅ Integração com AuthContext
+- ✅ Layout inicial da tela
+
+**Arquivos**:
+- `app/login.tsx` (novo)
+- `components/LoginScreen/` (nova pasta)
+
+**Impacto**: Fundação da interface de autenticação
+
+---
+
+#### Commit 2: `84e07a8` - Botão OAuth Google
+**Tipo**: `feat(ui)`
+**Título**: Add Google OAuth button component
+
+**Mudanças**:
+- ✅ Componente `GoogleButton` criado
+- ✅ Ícone do Google integrado
+- ✅ Estados de loading implementados
+- ✅ Estilo visual com cores da marca Google
+
+**Arquivos**:
+- `components/LoginScreen/GoogleButton.tsx` (novo)
+- `components/LoginScreen/index.tsx` (modificado)
+
+**Impacto**: Interface para login com Google
+
+---
+
+#### Commit 3: `c8a6631` - Botão OAuth GitHub
+**Tipo**: `feat(ui)`
+**Título**: Add GitHub OAuth button component
+
+**Mudanças**:
+- ✅ Componente `GitHubButton` criado
+- ✅ Ícone do GitHub integrado
+- ✅ Estados de loading sincronizados
+- ✅ Estilo visual tema GitHub
+
+**Arquivos**:
+- `components/LoginScreen/GitHubButton.tsx` (novo)
+- `components/LoginScreen/index.tsx` (modificado)
+
+**Impacto**: Interface para login com GitHub
+
+---
+
+#### Commit 4: `a746770` - Estilos Responsivos
+**Tipo**: `style(login)`
+**Título**: Implement responsive login screen styles
+
+**Mudanças**:
+- ✅ Layout responsivo para mobile/tablet
+- ✅ Espaçamentos e paddings otimizados
+- ✅ Tipografia ajustada
+- ✅ Componentes centralizados
+
+**Arquivos**:
+- `app/login.tsx` (modificado)
+- `components/LoginScreen/styles.ts` (novo)
+
+**Impacto**: UX aprimorado em diferentes dispositivos
+
+---
+
+#### Commit 5: `4bc2647` - Tema Escuro
+**Tipo**: `style(login)`
+**Título**: Add dark theme support to login screen
+
+**Mudanças**:
+- ✅ Suporte a tema claro/escuro
+- ✅ Integração com `ThemeContext`
+- ✅ Cores ajustadas para modo escuro
+- ✅ Contraste adequado mantido
+
+**Arquivos**:
+- `app/login.tsx` (modificado)
+- `components/LoginScreen/` (componentes modificados)
+
+**Impacto**: Consistência visual com o resto do app
+
+---
+
+#### Commit 6: `546d828` - Integração de Armazenamento
+**Tipo**: `feat(auth)`
+**Título**: Integrate secure storage service with AuthContext
+
+**Mudanças**:
+- ✅ SecureStorage integrado ao AuthContext
+- ✅ Salvamento automático de sessão no login
+- ✅ Carregamento de sessão na inicialização
+- ✅ Limpeza de sessão no logout
+
+**Arquivos**:
+- `contexts/AuthContext.tsx` (modificado)
+
+**Impacto**: Persistência de sessão funcional
+
+---
+
+#### Commit 7: `3d9f96f` - Fluxo OAuth Completo
+**Tipo**: `feat(auth)`
+**Título**: Implement complete Google OAuth authentication flow
+
+**Mudanças**:
+- ✅ Fluxo OAuth do Google implementado
+- ✅ Troca de código por tokens
+- ✅ Busca de perfil do usuário
+- ✅ Tratamento de callbacks
+- ✅ Mock data para desenvolvimento
+
+**Arquivos**:
+- `contexts/AuthContext.tsx` (modificado)
+
+**Impacto**: Login com Google funcional (mock)
+
+**Nota**: Usando mock data enquanto aguarda configuração real do OAuth
+
+---
+
+#### Commit 8: `5259eef` - Tela de Perfil
+**Tipo**: `feat(auth)`
+**Título**: Add user profile screen with OAuth data
+
+**Mudanças**:
+- ✅ Criada rota `/app/profile.tsx`
+- ✅ Exibição de dados do usuário (nome, email, avatar)
+- ✅ Badge do provedor OAuth (Google/GitHub)
+- ✅ Botão de logout funcional
+- ✅ Informações da conta detalhadas
+- ✅ Suporte a tema escuro
+
+**Arquivos**:
+- `app/profile.tsx` (novo - 224 linhas)
+
+**Impacto**: Usuários podem visualizar seus dados OAuth
+
+---
+
+#### Commit 9: `553a07b` - Renovação de Token
+**Tipo**: `feat(auth)`
+**Título**: Add automatic token refresh mechanism
+
+**Mudanças**:
+- ✅ Método `refreshSession()` implementado
+- ✅ Verificação automática de expiração
+- ✅ Renovação quando < 24h de validade
+- ✅ Intervalo de verificação (1 hora)
+- ✅ Logging de renovações
+
+**Arquivos**:
+- `contexts/AuthContext.tsx` (modificado)
+
+**Impacto**: Sessões se mantêm válidas automaticamente
+
+---
+
+#### Commit 10: `20ca57b` - Tratamento de Erros
+**Tipo**: `fix(auth)`
+**Título**: Add error handling to authentication flows
+
+**Mudanças**:
+- ✅ Try-catch em todos os métodos de auth
+- ✅ Estados de erro na UI
+- ✅ Componente `ErrorAlert` criado
+- ✅ Mensagens de erro amigáveis
+- ✅ Logging de erros detalhado
+
+**Arquivos**:
+- `contexts/AuthContext.tsx` (modificado)
+- `app/login.tsx` (modificado)
+- `components/LoginScreen/ErrorAlert.tsx` (novo)
+
+**Impacto**: UX melhorada em cenários de erro
+
+---
+
+#### Commit 11: `8f98830` - AuthProvider Integrado
+**Tipo**: `feat(auth)`
+**Título**: Integrate AuthProvider into component tree
+
+**Mudanças**:
+- ✅ `AuthProvider` adicionado ao `_layout.tsx`
+- ✅ Hierarquia: ThemeProvider > AuthProvider > App
+- ✅ Contexto disponível em toda a aplicação
+
+**Arquivos**:
+- `app/_layout.tsx` (modificado)
+
+**Impacto**: Sistema de autenticação ativo globalmente
+
+---
+
+#### Commit 12: `e6efc1f` - Rotas de Navegação
+**Tipo**: `feat(navigation)`
+**Título**: Add login and profile routes to navigation system
+
+**Mudanças**:
+- ✅ Rota `/login` configurada (headerShown: false)
+- ✅ Rota `/profile` configurada
+- ✅ Stack navigation atualizado
+- ✅ Transições entre telas funcionais
+
+**Arquivos**:
+- `app/_layout.tsx` (modificado)
+
+**Impacto**: Navegação completa entre telas de auth
+
+---
+
+### 📊 Estatísticas do Dia 2
+
+**Commits**: 12 (meta era 5!)
+**Arquivos Criados**: 8
+**Arquivos Modificados**: 5
+**Linhas de Código**: ~800+
+**Linhas de Documentação**: Incluídas no código
+
+**Distribuição**:
+- Código TypeScript: ~800 linhas
+- Componentes React: 6 novos
+- Telas: 2 novas (login, profile)
+
+---
+
+### 🎯 Objetivos Alcançados
+
+- ✅ Tela de login totalmente projetada
+- ✅ Botões OAuth (Google e GitHub) implementados
+- ✅ Estilos responsivos aplicados
+- ✅ Suporte a tema claro/escuro
+- ✅ Integração de armazenamento seguro
+- ✅ Fluxo OAuth do Google (mock)
+- ✅ Tela de perfil completa
+- ✅ Renovação automática de token
+- ✅ Tratamento de erros robusto
+- ✅ AuthProvider integrado
+- ✅ Rotas de navegação configuradas
+
+---
+
+### 📦 Entregas do Dia 2
+
+#### Código
+1. **LoginScreen** - Interface completa de login
+2. **ProfileScreen** - Tela de perfil do usuário
+3. **OAuth Buttons** - Componentes Google e GitHub
+4. **Error Handling** - Tratamento de erros
+5. **Token Refresh** - Renovação automática
+6. **Navigation** - Rotas configuradas
+
+#### UI/UX
+1. **Responsive Layout** - Adaptável a todos dispositivos
+2. **Dark Theme** - Tema escuro implementado
+3. **Loading States** - Estados de carregamento
+4. **Error Alerts** - Alertas de erro amigáveis
+
+---
+
+### 🔧 Stack Tecnológica Implementada
+
+**Componentes**:
+- React Native components (View, Text, TouchableOpacity, etc)
+- Expo Router (Stack navigation)
+- Context API (Auth + Theme)
+
+**UI**:
+- StyleSheet (React Native)
+- Ionicons (ícones)
+- Tema dinâmico (claro/escuro)
+
+**Navegação**:
+- expo-router
+- Stack Navigator
+- Route guards (preparação)
+
+---
+
+### 🚧 Próximos Passos (Dia 3)
+
+**Planejado para 23 de outubro de 2025**:
+
+1. ⏳ Implementar persistência completa de sessão
+2. ⏳ Adicionar guardas de rota (route protection)
+3. ⏳ Integrar estado de auth no Header
+4. ⏳ Tratar casos extremos e edge cases
+5. ⏳ Validação de sessão na inicialização
+
+**Commits Esperados**: 5
+
+---
+
+### 📝 Notas de Desenvolvimento
+
+#### Decisões Técnicas
+
+1. **Por que mock OAuth no Dia 2?**
+   - Permite testar fluxo completo sem configuração externa
+   - Desenvolvimento local mais rápido
+   - OAuth real será integrado posteriormente
+
+2. **Por que criar tela de perfil no Dia 2?**
+   - Permite testar estado autenticado
+   - Valida dados do usuário salvos
+   - Necessário para testar logout
+
+3. **Por que 12 commits ao invés de 5?**
+   - Commits menores e mais específicos
+   - Melhor rastreabilidade
+   - Facilita code review
+
+#### Lições Aprendidas
+
+- ✅ Mock data acelera desenvolvimento e testes
+- ✅ Componentes separados facilitam manutenção
+- ✅ Tratamento de erro desde o início evita bugs
+- ✅ Dark theme deve ser considerado desde o design
+
+---
+
+### 🐛 Issues Encontrados
+
+**Issue 1**: Conflito de plugins no app.json
+- **Solução**: Removido expo-auth-session do array de plugins (commit 6312ec7)
+
+**Issue 2**: Estados de loading concorrentes
+- **Solução**: Estados separados para cada botão OAuth
+
+---
+
+### 📈 Progresso da Sprint
+
+**Meta Total**: 25 commits em 5 dias
+**Dia 1**: 6 commits
+**Dia 2**: 12 commits
+**Total**: 18 commits
+**Progresso**: 72% (18/25)
+
+**Status**: ✅ Muito acima do prazo!
+
+---
+
+### 👥 Contribuidores
+
+**Anderson Henrique da Silva - COMP VIII**
+- Interface de login completa
+- Tela de perfil do usuário
+- Fluxo OAuth (mock)
+- Tratamento de erros
+- Renovação automática de token
+- Integração de navegação
 
 ---
 
@@ -306,5 +668,5 @@ Avisos npm sobre versão do Node (20.18.1 vs 20.19.4) - não impedem funcionamen
 
 ---
 
-**Última Atualização**: 21 de outubro de 2025 às 17:00 BRT
-**Próxima Atualização**: 22 de outubro de 2025
+**Última Atualização**: 24 de outubro de 2025 às 14:30 BRT
+**Próxima Atualização**: 25 de outubro de 2025
