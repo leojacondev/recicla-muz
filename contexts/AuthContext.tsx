@@ -81,6 +81,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       setIsLoading(true);
 
+      // Validar configuração OAuth
+      if (!OAUTH_CONFIG.google.clientId) {
+        throw new Error('Client ID do Google não configurado. Verifique as variáveis de ambiente.');
+      }
+
       // Configuração do discovery document do Google
       const discovery = {
         authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
@@ -109,6 +114,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         provider: 'google',
       };
 
+      // Validar dados do usuário antes de salvar
+      if (!mockUser.id || !mockUser.email) {
+        throw new Error('Dados de usuário inválidos recebidos do Google');
+      }
+
       setUser(mockUser);
 
       // Salvar sessão no armazenamento seguro
@@ -117,7 +127,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.log('✅ Login com Google realizado e sessão salva');
 
     } catch (error) {
-      console.error('Erro no login com Google:', error);
+      console.error('❌ Erro no login com Google:', error);
+      // Limpar qualquer estado parcial
+      setUser(null);
+      await secureStorage.clearSession();
       throw error;
     } finally {
       setIsLoading(false);
@@ -127,6 +140,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signInWithGitHub = async () => {
     try {
       setIsLoading(true);
+
+      // Validar configuração OAuth
+      if (!OAUTH_CONFIG.github.clientId) {
+        throw new Error('Client ID do GitHub não configurado. Verifique as variáveis de ambiente.');
+      }
 
       // Configuração do discovery document do GitHub
       const discovery = {
@@ -146,6 +164,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         provider: 'github',
       };
 
+      // Validar dados do usuário antes de salvar
+      if (!mockUser.id || !mockUser.email) {
+        throw new Error('Dados de usuário inválidos recebidos do GitHub');
+      }
+
       setUser(mockUser);
 
       // Salvar sessão no armazenamento seguro
@@ -154,7 +177,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.log('✅ Login com GitHub realizado e sessão salva');
 
     } catch (error) {
-      console.error('Erro no login com GitHub:', error);
+      console.error('❌ Erro no login com GitHub:', error);
+      // Limpar qualquer estado parcial
+      setUser(null);
+      await secureStorage.clearSession();
       throw error;
     } finally {
       setIsLoading(false);
@@ -184,9 +210,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return;
       }
 
+      // Validar integridade dos dados da sessão
+      if (!session.user || !session.user.id || !session.expiresAt) {
+        console.error('❌ Sessão corrompida detectada');
+        await secureStorage.clearSession();
+        setUser(null);
+        return;
+      }
+
       // Verificar se a sessão está próxima de expirar (< 24 horas)
       const timeUntilExpiry = session.expiresAt - Date.now();
       const oneDayInMs = 24 * 60 * 60 * 1000;
+
+      if (timeUntilExpiry < 0) {
+        console.log('⏰ Sessão expirada, limpando...');
+        await secureStorage.clearSession();
+        setUser(null);
+        return;
+      }
 
       if (timeUntilExpiry < oneDayInMs) {
         console.log('🔄 Renovando sessão...');
@@ -202,7 +243,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     } catch (error) {
       console.error('❌ Erro ao renovar sessão:', error);
-      throw error;
+      // Não fazer throw aqui para não quebrar o intervalo de renovação
+      // Em caso de erro, apenas log e tenta novamente na próxima execução
     }
   };
 
