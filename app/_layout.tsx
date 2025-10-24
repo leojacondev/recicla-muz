@@ -8,6 +8,8 @@ import 'react-native-reanimated';
 
 import Header from '@/components/Header';
 import { ThemeProvider, useTheme } from '@/contexts/ThemeContext';
+import { AuthProvider } from '@/contexts/AuthContext';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
 
 export {
   ErrorBoundary
@@ -41,7 +43,9 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider>
-      <RootLayoutNav />
+      <AuthProvider>
+        <RootLayoutNav />
+      </AuthProvider>
     </ThemeProvider>
   );
 }
@@ -51,14 +55,27 @@ function RootLayoutNav() {
 
   return (
     <NavigationThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack
-        screenOptions={{
-          header: () => <Header onToggleTheme={toggleTheme} />,
-        }}
-      >
-        <Stack.Screen name="index" />
-        <Stack.Screen name="map" options={{ title: 'Mapa' }} />
-      </Stack>
+      <ProtectedRoute>
+        <Stack
+          screenOptions={{
+            header: () => <Header onToggleTheme={toggleTheme} />,
+          }}
+        >
+          <Stack.Screen name="index" />
+          <Stack.Screen name="map" options={{ title: 'Mapa' }} />
+          <Stack.Screen
+            name="login"
+            options={{
+              title: 'Login',
+              headerShown: false
+            }}
+          />
+          <Stack.Screen
+            name="profile"
+            options={{ title: 'Perfil' }}
+          />
+        </Stack>
+      </ProtectedRoute>
     </NavigationThemeProvider>
   );
 }
