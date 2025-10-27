@@ -10,13 +10,16 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (isLoading) return;
 
-    const inAuthGroup = segments[0] === '(auth)';
+    // Lista de rotas que REQUEREM autenticação
+    const protectedRoutes = ['profile', 'settings'];
+    const currentRoute = segments[0];
 
-    if (!isAuthenticated && !inAuthGroup && segments[0] !== 'login') {
-      // Redirecionar para login se não autenticado
+    // Se tentar acessar rota protegida sem estar autenticado, redireciona para login
+    if (!isAuthenticated && protectedRoutes.includes(currentRoute)) {
       router.replace('/login');
-    } else if (isAuthenticated && segments[0] === 'login') {
-      // Redirecionar para home se já autenticado
+    }
+    // Se já estiver autenticado e tentar acessar login, volta para home
+    else if (isAuthenticated && currentRoute === 'login') {
       router.replace('/');
     }
   }, [isAuthenticated, isLoading, segments]);

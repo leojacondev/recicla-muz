@@ -75,7 +75,7 @@ export default function LoginScreen() {
 
       <View style={styles.content}>
         <Text style={textStyle(styles.instructions)}>
-          Faça login para acessar o mapa de pontos de coleta
+          Faça login para acessar recursos exclusivos
         </Text>
 
         {error && <ErrorAlert message={error} onDismiss={() => setError(null)} />}
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#2ecc71',
+    color: '#2e7d32',
     marginBottom: 8,
   },
   subtitle: {
