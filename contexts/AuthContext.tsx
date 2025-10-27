@@ -35,10 +35,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const OAUTH_CONFIG = {
   google: {
     clientId: process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID || '',
-    redirectUri: AuthSession.makeRedirectUri({
-      scheme: 'reciclamuz',
-      path: 'auth/google',
-    }),
+    // Para web/desenvolvimento, usar localhost que já está configurado
+    redirectUri: 'http://localhost:19006/auth/google',
     scopes: ['openid', 'profile', 'email'],
   },
   github: {
