@@ -1,5 +1,5 @@
 import MapScreen from '@/components/MapScreen';
 
-export default function MapPage() {
+export default function MapScreenPage() {
   return <MapScreen />;
 }
