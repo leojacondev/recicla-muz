@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { GoogleButton, GitHubButton, ErrorAlert } from '@/components/LoginScreen';
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -46,122 +46,211 @@ export default function LoginScreen() {
     }
   };
 
-  const containerStyle = [
-    styles.container,
-    isDark && styles.containerDark
-  ];
-
-  const textStyle = (baseStyle: any) => [
-    baseStyle,
-    isDark && styles.textDark
-  ];
-
   if (isLoading) {
     return (
-      <View style={containerStyle}>
-        <Text style={textStyle(styles.loadingText)}>Carregando...</Text>
+      <View style={[styles.container, isDark && styles.containerDark, styles.centerContent]}>
+        <ActivityIndicator size="large" color="#2d5016" />
+        <Text style={[styles.loadingText, isDark && styles.textDark]}>Carregando...</Text>
       </View>
     );
   }
 
   return (
-    <View style={containerStyle}>
+    <ScrollView
+      style={[styles.container, isDark && styles.containerDark]}
+      contentContainerStyle={styles.contentContainer}
+    >
       <View style={styles.header}>
-        <Text style={textStyle(styles.title)}>ReciclaMuz</Text>
-        <Text style={textStyle(styles.subtitle)}>
-          Bem-vindo ao app de reciclagem de Muzambinho
+        <Text style={[styles.title, isDark && styles.titleDark]}>🌿 Bem-vindo</Text>
+        <Text style={[styles.subtitle, isDark && styles.textDark]}>
+          Faça login para acessar recursos exclusivos do ReciclaMuz
         </Text>
       </View>
 
-      <View style={styles.content}>
-        <Text style={textStyle(styles.instructions)}>
-          Faça login para acessar o mapa de pontos de coleta
+      {error && (
+        <View style={styles.errorCard}>
+          <Ionicons name="alert-circle" size={24} color="#e74c3c" />
+          <Text style={styles.errorText}>{error}</Text>
+          <TouchableOpacity onPress={() => setError(null)}>
+            <Ionicons name="close" size={20} color="#e74c3c" />
+          </TouchableOpacity>
+        </View>
+      )}
+
+      <View style={[styles.card, isDark && styles.cardDark]}>
+        <Text style={[styles.cardTitle, isDark && styles.textDark]}>
+          Escolha seu método de login
         </Text>
 
-        {error && <ErrorAlert message={error} onDismiss={() => setError(null)} />}
+        <TouchableOpacity
+          style={[
+            styles.button,
+            styles.googleButton,
+            (loadingGoogle || loadingGitHub) && styles.buttonDisabled
+          ]}
+          onPress={handleGoogleLogin}
+          disabled={loadingGoogle || loadingGitHub}
+        >
+          {loadingGoogle ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <>
+              <Ionicons name="logo-google" size={24} color="#fff" />
+              <Text style={styles.buttonText}>Continuar com Google</Text>
+            </>
+          )}
+        </TouchableOpacity>
 
-        <View style={styles.buttonsContainer}>
-          <GoogleButton
-            onPress={handleGoogleLogin}
-            loading={loadingGoogle}
-            disabled={loadingGitHub}
-          />
-          <GitHubButton
-            onPress={handleGitHubLogin}
-            loading={loadingGitHub}
-            disabled={loadingGoogle}
-          />
-        </View>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            styles.githubButton,
+            (loadingGoogle || loadingGitHub) && styles.buttonDisabled
+          ]}
+          onPress={handleGitHubLogin}
+          disabled={loadingGoogle || loadingGitHub}
+        >
+          {loadingGitHub ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <>
+              <Ionicons name="logo-github" size={24} color="#fff" />
+              <Text style={styles.buttonText}>Continuar com GitHub</Text>
+            </>
+          )}
+        </TouchableOpacity>
 
         <View style={styles.divider}>
           <View style={[styles.dividerLine, isDark && styles.dividerLineDark]} />
-          <Text style={textStyle(styles.dividerText)}>ou</Text>
+          <Text style={[styles.dividerText, isDark && styles.textDark]}>ou</Text>
           <View style={[styles.dividerLine, isDark && styles.dividerLineDark]} />
         </View>
 
-        <Text style={textStyle(styles.guestText)}>
-          Continue como visitante para explorar o app
-        </Text>
+        <TouchableOpacity
+          style={[styles.button, styles.guestButton, isDark && styles.guestButtonDark]}
+          onPress={() => router.replace('/')}
+        >
+          <Ionicons name="arrow-back" size={20} color={isDark ? '#fff' : '#2d5016'} />
+          <Text style={[styles.guestButtonText, isDark && styles.textDark]}>
+            Voltar para o app
+          </Text>
+        </TouchableOpacity>
       </View>
 
-      <View style={styles.footer}>
-        <Text style={textStyle(styles.footerText)}>
-          Ao continuar, você concorda com nossos Termos de Serviço e Política de Privacidade
+      <View style={[styles.infoCard, isDark && styles.cardDark]}>
+        <Ionicons name="lock-closed" size={20} color="#2d5016" />
+        <Text style={[styles.infoText, isDark && styles.textDark]}>
+          Ao fazer login, você concorda com nossos{' '}
+          <Text style={styles.link}>Termos de Serviço</Text> e{' '}
+          <Text style={styles.link}>Política de Privacidade</Text>
         </Text>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    padding: 20,
-    justifyContent: 'space-between',
+    backgroundColor: '#f8f9fa',
   },
   containerDark: {
     backgroundColor: '#1a1a1a',
   },
-  textDark: {
-    color: '#e0e0e0',
+  contentContainer: {
+    padding: 20,
+    paddingTop: 40,
+    paddingBottom: 40,
   },
-  header: {
-    marginTop: 60,
+  centerContent: {
+    justifyContent: 'center',
     alignItems: 'center',
   },
+  header: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
   title: {
-    fontSize: 32,
+    fontSize: 36,
     fontWeight: 'bold',
-    color: '#2ecc71',
+    color: '#2d5016',
     marginBottom: 8,
+    textAlign: 'center',
+  },
+  titleDark: {
+    color: '#4caf50',
   },
   subtitle: {
     fontSize: 16,
     color: '#666',
     textAlign: 'center',
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  instructions: {
-    fontSize: 18,
-    color: '#333',
-    textAlign: 'center',
-    marginBottom: 40,
-  },
-  buttonsContainer: {
-    width: '100%',
-    maxWidth: 400,
     paddingHorizontal: 20,
+  },
+  textDark: {
+    color: '#e0e0e0',
+  },
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    padding: 20,
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  cardDark: {
+    backgroundColor: '#2a2a2a',
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 16,
+    borderRadius: 8,
+    marginBottom: 12,
+    gap: 12,
+  },
+  googleButton: {
+    backgroundColor: '#4285F4',
+  },
+  githubButton: {
+    backgroundColor: '#24292e',
+  },
+  guestButton: {
+    backgroundColor: '#f8f9fa',
+    borderWidth: 1,
+    borderColor: '#2d5016',
+  },
+  guestButtonDark: {
+    backgroundColor: '#1a1a1a',
+    borderColor: '#4caf50',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  guestButtonText: {
+    color: '#2d5016',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  buttonDisabled: {
+    opacity: 0.5,
   },
   divider: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 24,
-    paddingHorizontal: 20,
+    marginVertical: 20,
   },
   dividerLine: {
     flex: 1,
@@ -176,22 +265,43 @@ const styles = StyleSheet.create({
     color: '#999',
     fontSize: 14,
   },
-  guestText: {
-    textAlign: 'center',
-    color: '#666',
+  errorCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fee',
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 20,
+    gap: 12,
+    borderWidth: 1,
+    borderColor: '#e74c3c',
+  },
+  errorText: {
+    flex: 1,
+    color: '#c0392b',
     fontSize: 14,
-    fontStyle: 'italic',
+  },
+  infoCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    padding: 16,
+    gap: 12,
+  },
+  infoText: {
+    flex: 1,
+    fontSize: 12,
+    color: '#666',
+    lineHeight: 18,
+  },
+  link: {
+    color: '#2d5016',
+    fontWeight: '600',
   },
   loadingText: {
-    fontSize: 18,
+    marginTop: 16,
+    fontSize: 16,
     color: '#666',
-  },
-  footer: {
-    marginBottom: 20,
-  },
-  footerText: {
-    fontSize: 12,
-    color: '#999',
-    textAlign: 'center',
   },
 });
