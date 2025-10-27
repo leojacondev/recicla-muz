@@ -2,8 +2,10 @@
 
 **Autor**: Anderson Henrique da Silva - COMP VIII
 **Criado em**: 21 de outubro de 2025 (Terça-feira) às 14:30 BRT
-**Duração da Sprint**: 5 dias (21-25 de outubro de 2025)
+**Última Atualização**: 27 de outubro de 2025 às 11:15 BRT
+**Duração da Sprint**: 5 dias (21-25 de outubro de 2025) - **Em Andamento (Estendida)**
 **Meta**: 25 commits (5 commits/dia)
+**Progresso**: 20 commits (80%) ✅
 **Funcionalidade**: Login OAuth (Google/GitHub) com Armazenamento Local
 
 ---
@@ -39,34 +41,36 @@
 
 ## 📅 Detalhamento da Sprint de 5 Dias
 
-### **DIA 1: Configuração da Infraestrutura OAuth** (21 de outubro de 2025)
+### **✅ DIA 1: Configuração da Infraestrutura OAuth** (21 de outubro de 2025) - COMPLETO
 
 **Foco**: Fundação e infraestrutura de autenticação
+**Status**: ✅ 100% Completo (6/5 commits - superou a meta!)
 
-#### Commits (5):
-1. **docs: cria roadmap de sprint e estrutura de documentação**
+#### Commits Planejados (5) - Realizados (6):
+1. ✅ **docs: cria roadmap de sprint e estrutura de documentação** [`212e389`]
    - Criar estrutura de pastas `/docs`
    - Documento de roadmap da sprint
    - Placeholders para diagramas de arquitetura
 
-2. **chore: instala dependências OAuth e armazenamento**
+2. ✅ **chore: instala dependências OAuth e armazenamento** [`7534191`]
    - `expo-auth-session` para fluxos OAuth
    - `expo-web-browser` para redirecionamentos de autenticação
    - `@react-native-async-storage/async-storage`
    - `expo-crypto` para manipulação segura de tokens
 
-3. **feat(auth): cria AuthContext com configuração de provedores OAuth**
+3. ✅ **feat(auth): cria AuthContext com configuração de provedores OAuth** [`9a50030`]
    - `/contexts/AuthContext.tsx`
    - Configuração OAuth do Google
    - Configuração OAuth do GitHub
    - Interface de estado do usuário
 
-4. **feat(storage): implementa serviço de armazenamento seguro para tokens de autenticação**
+4. ✅ **feat(storage): implementa serviço de armazenamento seguro para tokens de autenticação** [`3666c99`]
    - `/services/SecureStorage.ts`
    - Utilitários de criptografia/descriptografia de tokens
    - Wrapper do AsyncStorage com segurança
 
-5. **config: configura credenciais de aplicativos OAuth e URIs de redirecionamento**
+5. ✅ **config: configura credenciais de aplicativos OAuth e URIs de redirecionamento** [`99a35d1`]
+6. ✅ **docs(architecture): documenta arquitetura completa do sistema** [`8f61c02`] (BÔNUS)
    - Atualizar `app.json` com esquemas OAuth
    - Configuração de ambiente para chaves OAuth
    - Configuração de URI de redirecionamento
@@ -517,9 +521,9 @@ App (_layout.tsx)
 
 ---
 
-**Versão do Documento**: 1.0
-**Última Atualização**: 21 de outubro de 2025 às 14:30 BRT
-**Próxima Revisão**: 25 de outubro de 2025 (Fim da sprint)
+**Versão do Documento**: 1.1
+**Última Atualização**: 27 de outubro de 2025 às 11:15 BRT
+**Próxima Revisão**: Após conclusão dos Dias 4 e 5
 
 ---
 
