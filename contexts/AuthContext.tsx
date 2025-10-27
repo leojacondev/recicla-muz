@@ -86,24 +86,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         throw new Error('Client ID do Google não configurado. Verifique as variáveis de ambiente.');
       }
 
-      // Configuração do discovery document do Google
-      const discovery = {
-        authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
-        tokenEndpoint: 'https://oauth2.googleapis.com/token',
-      };
-
-      // Criar request de autenticação
-      const [request, response, promptAsync] = AuthSession.useAuthRequest(
-        {
-          clientId: OAUTH_CONFIG.google.clientId,
-          scopes: ['openid', 'profile', 'email'],
-          redirectUri: OAUTH_CONFIG.google.redirectUri,
-        },
-        discovery
-      );
-
-      // TODO: Implementar fluxo OAuth completo
-      console.log('Google OAuth iniciado');
+      // TODO: Implementar fluxo OAuth completo com AuthSession.useAuthRequest
+      // Por enquanto, usando mock para desenvolvimento
+      console.log('Google OAuth iniciado (modo mock)');
 
       // Mock de usuário para desenvolvimento
       const mockUser: User = {
@@ -146,14 +131,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         throw new Error('Client ID do GitHub não configurado. Verifique as variáveis de ambiente.');
       }
 
-      // Configuração do discovery document do GitHub
-      const discovery = {
-        authorizationEndpoint: 'https://github.com/login/oauth/authorize',
-        tokenEndpoint: 'https://github.com/login/oauth/access_token',
-      };
-
       // TODO: Implementar fluxo OAuth completo
-      console.log('GitHub OAuth iniciado');
+      // Por enquanto, usando mock para desenvolvimento
+      console.log('GitHub OAuth iniciado (modo mock)');
 
       // Mock de usuário para desenvolvimento
       const mockUser: User = {

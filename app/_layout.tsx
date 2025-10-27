@@ -66,8 +66,7 @@ function RootLayoutNav() {
           <Stack.Screen
             name="login"
             options={{
-              title: 'Login',
-              headerShown: false
+              title: 'Login'
             }}
           />
           <Stack.Screen

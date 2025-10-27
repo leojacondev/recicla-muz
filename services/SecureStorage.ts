@@ -47,7 +47,7 @@ class SecureStorageService {
       );
       // Por enquanto, apenas retorna base64 do hash + dados
       // Em produção, usar criptografia simétrica adequada (AES)
-      const encoded = Buffer.from(data).toString('base64');
+      const encoded = btoa(unescape(encodeURIComponent(data)));
       return `${hash.substring(0, 16)}:${encoded}`;
     } catch (error) {
       console.error('Erro ao criptografar dados:', error);
@@ -65,7 +65,7 @@ class SecureStorageService {
       if (!encoded) {
         throw new Error('Formato de dados criptografados inválido');
       }
-      return Buffer.from(encoded, 'base64').toString('utf-8');
+      return decodeURIComponent(escape(atob(encoded)));
     } catch (error) {
       console.error('Erro ao descriptografar dados:', error);
       throw error;
