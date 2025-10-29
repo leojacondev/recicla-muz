@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, Link } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -138,12 +138,19 @@ export default function LoginScreen() {
       </View>
 
       <View style={[styles.infoCard, isDark && styles.cardDark]}>
-        <Ionicons name="lock-closed" size={20} color="#2d5016" />
-        <Text style={[styles.infoText, isDark && styles.textDark]}>
-          Ao fazer login, você concorda com nossos{' '}
-          <Text style={styles.link}>Termos de Serviço</Text> e{' '}
-          <Text style={styles.link}>Política de Privacidade</Text>
-        </Text>
+        <Ionicons name="lock-closed" size={20} color={isDark ? '#4caf50' : '#2d5016'} />
+        <View style={{ flex: 1 }}>
+          <Text style={[styles.infoText, isDark && styles.textDark]}>
+            Ao fazer login, você concorda com nossos{' '}
+            <Link href="/politicas/termos" style={[styles.link, isDark && styles.linkDark]}>
+              Termos de Uso
+            </Link>
+            {' '}e{' '}
+            <Link href="/politicas/privacidade" style={[styles.link, isDark && styles.linkDark]}>
+              Política de Privacidade
+            </Link>
+          </Text>
+        </View>
       </View>
     </ScrollView>
   );
@@ -298,6 +305,10 @@ const styles = StyleSheet.create({
   link: {
     color: '#2d5016',
     fontWeight: '600',
+    textDecorationLine: 'underline',
+  },
+  linkDark: {
+    color: '#4caf50',
   },
   loadingText: {
     marginTop: 16,
