@@ -97,6 +97,9 @@ npm start           Inicia o servidor de desenvolvimento
 npm run android     Abre no emulador/dispositivo Android
 npm run ios         Abre no simulador iOS (apenas macOS)
 npm run web         Abre no navegador
+npm test            Executa os testes unitários
+npm run test:watch  Executa os testes em modo watch
+npm run test:coverage Executa os testes com relatório de cobertura
 ```
 
 Testando no Dispositivo
@@ -111,13 +114,68 @@ Testando no Dispositivo
 
 ```
 reciclamuz/
-├── app/                     Rotas e telas do aplicativo (Expo Router)
-├── assets/                  Imagens, fontes e outros recursos
-│   └── images/             Ícones e imagens
-├── app.json                Configurações do Expo
-├── package.json            Dependências do projeto
-└── tsconfig.json           Configurações do TypeScript
+├── .maestro/               Testes E2E com Maestro
+├── __tests__/              Testes unitários e de componentes
+│   ├── components/         Testes de componentes React
+│   └── contexts/           Testes de contextos
+├── app/                    Rotas e telas do aplicativo (Expo Router)
+├── assets/                 Imagens, fontes e outros recursos
+│   └── images/            Ícones e imagens
+├── components/             Componentes reutilizáveis
+├── contexts/               Contextos React (Auth, Theme, etc)
+├── services/               Serviços e utilitários
+├── app.json               Configurações do Expo
+├── jest.config.js         Configuração do Jest
+├── jest.setup.js          Setup dos testes
+├── package.json           Dependências do projeto
+└── tsconfig.json          Configurações do TypeScript
 ```
+
+🧪 Testes
+
+O projeto possui uma suite completa de testes automatizados:
+
+### Testes Unitários e de Componentes (Jest)
+
+Executar todos os testes:
+```bash
+npm test
+```
+
+Executar com cobertura:
+```bash
+npm run test:coverage
+```
+
+**Cobertura de Testes:**
+- ✅ Contextos (AuthContext, ThemeContext)
+- ✅ Componentes (HomeScreen)
+- 📊 **23 testes** passando com sucesso
+
+### Testes E2E (Maestro)
+
+Instale o Maestro:
+```bash
+curl -Ls "https://get.maestro.mobile.dev" | bash
+```
+
+Execute os testes E2E:
+```bash
+# Executar todos os testes
+maestro test .maestro/
+
+# Executar teste específico
+maestro test .maestro/app-launch.yaml
+```
+
+**Cenários de Teste E2E:**
+- ✅ Lançamento da aplicação
+- ✅ Navegação entre abas
+- ✅ Fluxo de login
+- ✅ Banner de consentimento de cookies
+- ✅ Navegação pelas políticas
+
+Para mais detalhes sobre os testes, consulte [.maestro/README.md](.maestro/README.md)
 
  📱 Funcionalidades em Desenvolvimento
 

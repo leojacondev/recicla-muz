@@ -45,8 +45,23 @@ yarn-error.*
 .vscode/
 .cursor/
 
+# IDEs
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+
 #package-lock.json
 package-lock.json
+
+# Testing
+coverage/
+.nyc_output/
+*.log
+
+# Maestro
+.maestro/.maestro_output/
 
 # Claude AI files
 .claude/
