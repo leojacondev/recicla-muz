@@ -1,0 +1,9 @@
+appId: com.anonymous.reciclamuz
+---
+# Test: App Launch and Home Screen
+# Verifies that the app launches successfully and displays the home screen
+
+- launchApp
+- assertVisible: "ReciclaMuz"
+- assertVisible: "Pontos de coleta de lixo em Muzambinho"
+- assertVisible: "🎯 Objetivo do Projeto"

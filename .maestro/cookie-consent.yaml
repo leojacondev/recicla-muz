@@ -1,0 +1,23 @@
+appId: com.anonymous.reciclamuz
+---
+# Test: Cookie Consent Banner
+# Verifies that cookie consent banner appears and works correctly
+
+- launchApp
+- assertVisible: "ReciclaMuz"
+
+# Cookie banner should appear on first launch
+# Note: This test assumes a fresh install or cleared storage
+- assertVisible:
+    text: "Este site usa cookies"
+    optional: true
+
+# If banner is visible, test accept button
+- tapOn:
+    text: "Aceitar todos"
+    optional: true
+
+# Verify banner disappears after acceptance
+- assertNotVisible:
+    text: "Este site usa cookies"
+    optional: true

@@ -1,0 +1,27 @@
+appId: com.anonymous.reciclamuz
+---
+# Test: Policies Navigation
+# Verifies that all policy pages are accessible and display correctly
+
+- launchApp
+- assertVisible: "ReciclaMuz"
+
+# Navigate to login to access policy links
+- tapOn: "Perfil"
+- assertVisible: "🌿 Bem-vindo"
+
+# Test Terms of Use link
+- tapOn: "Termos de Uso"
+- assertVisible: "Termos de Uso"
+- assertVisible: "ReciclaMuz"
+- tapOn: "arrow-back"
+
+# Test Privacy Policy link
+- tapOn: "Política de Privacidade"
+- assertVisible: "Política de Privacidade"
+- assertVisible: "ReciclaMuz"
+- tapOn: "arrow-back"
+
+# Return to home
+- tapOn: "Home"
+- assertVisible: "🎯 Objetivo do Projeto"

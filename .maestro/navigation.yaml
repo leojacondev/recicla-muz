@@ -1,0 +1,23 @@
+appId: com.anonymous.reciclamuz
+---
+# Test: Bottom Tab Navigation
+# Verifies that all bottom tabs are accessible and functional
+
+- launchApp
+- assertVisible: "ReciclaMuz"
+
+# Test Home Tab
+- tapOn: "Home"
+- assertVisible: "🎯 Objetivo do Projeto"
+
+# Test Map Tab
+- tapOn: "Mapa"
+- assertVisible: "Mapa"
+
+# Test Profile Tab
+- tapOn: "Perfil"
+- assertVisible: "🌿 Bem-vindo"
+
+# Return to Home
+- tapOn: "Home"
+- assertVisible: "ReciclaMuz"
