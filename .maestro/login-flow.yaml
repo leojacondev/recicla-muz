@@ -1,0 +1,22 @@
+appId: com.anonymous.reciclamuz
+---
+# Test: Login Screen Flow
+# Verifies login screen elements and navigation
+
+- launchApp
+- assertVisible: "ReciclaMuz"
+
+# Navigate to Profile/Login
+- tapOn: "Perfil"
+- assertVisible: "🌿 Bem-vindo"
+- assertVisible: "Faça login para acessar recursos exclusivos do ReciclaMuz"
+
+# Verify login options are present
+- assertVisible: "Continuar com Google"
+- assertVisible: "Continuar com GitHub"
+- assertVisible: "Voltar para o app"
+
+# Test back to app button
+- tapOn: "Voltar para o app"
+- assertVisible: "ReciclaMuz"
+- assertVisible: "🎯 Objetivo do Projeto"
