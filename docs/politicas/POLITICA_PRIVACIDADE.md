@@ -1,6 +1,6 @@
 # Política de Privacidade - ReciclaMuz
 
-**Última atualização**: 28 de outubro de 2025
+**Última atualização**: 07 de novembro de 2025
 
 ## 1. Introdução
 
