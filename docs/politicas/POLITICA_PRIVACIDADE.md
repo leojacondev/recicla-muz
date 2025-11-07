@@ -160,7 +160,10 @@ Implementamos:
 ### 5.3 Retenção de Dados
 
 - **Dados de autenticação**: Mantidos enquanto sua conta estiver ativa
-- **Avaliações e comentários**: Mantidos permanentemente (podem ser editados ou excluídos por você)
+- **Avaliações e comentários**:
+  - Armazenadas localmente enquanto o app estiver instalado
+  - Podem ser editadas ou excluídas por você a qualquer momento
+  - Anonimizadas se você excluir sua conta (mantém texto sem identificação)
 - **Logs de uso**: Mantidos por até 12 meses
 - **Dados excluídos**: Removidos permanentemente em até 30 dias após solicitação
 
