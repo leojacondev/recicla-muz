@@ -142,7 +142,10 @@ Compartilhamos dados apenas quando:
 
 - **Dados de autenticação**: Armazenados localmente no seu dispositivo, criptografados
 - **Dados de perfil**: Armazenados em servidores seguros (quando implementarmos backend)
+- **Avaliações e comentários**: Armazenados localmente no dispositivo via AsyncStorage
 - **Localização**: Nunca armazenada permanentemente
+
+📱 **Importante**: Atualmente, as avaliações são armazenadas apenas no seu dispositivo. Se você desinstalar o app ou limpar os dados, suas avaliações serão perdidas.
 
 ### 5.2 Medidas de Segurança
 
