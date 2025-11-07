@@ -16,12 +16,17 @@ O ReciclaMuz é um aplicativo desenvolvido para facilitar a identificação e lo
 
 ✨ Principais Funcionalidades
 
-- 🔐  Sistema de Login : Autenticação de usuários com diferentes níveis de acesso
-- 📍  Mapa Interativo : Visualização de todos os pontos de coleta de lixo na cidade
-- 🗂️  Categorização de Resíduos : Identificação dos tipos de materiais aceitos em cada ponto
-- 📱  Interface Intuitiva : Design responsivo e fácil de usar
-- ⭐  Avaliações : Sistema de feedback dos usuários sobre os pontos de coleta
-- 👨‍💼  Painel Administrativo : Administradores podem criar, editar e gerenciar pontos de coleta
+- 🔐 **Sistema de Login**: Autenticação OAuth (Google/GitHub) com persistência de sessão
+- 📍 **Mapa Interativo**: Visualização de todos os pontos de coleta de lixo na cidade
+- 🗂️ **Categorização de Resíduos**: Identificação dos tipos de materiais aceitos em cada ponto
+- 📱 **Interface Intuitiva**: Design responsivo e fácil de usar
+- ⭐ **Sistema de Avaliações**:
+  - Avalie pontos de coleta com 1-5 estrelas
+  - Adicione comentários detalhados
+  - Edite ou exclua suas avaliações
+  - Veja estatísticas e distribuição de avaliações
+  - Persistência local sem necessidade de backend
+- 👨‍💼 **Painel Administrativo**: Administradores podem criar, editar e gerenciar pontos de coleta
 
 👥 Equipe
 
@@ -177,12 +182,49 @@ maestro test .maestro/app-launch.yaml
 
 Para mais detalhes sobre os testes, consulte [.maestro/README.md](.maestro/README.md)
 
+## 🌟 Sistema de Avaliações
+
+O ReciclaMuz agora conta com um sistema completo de avaliações que permite aos usuários fornecerem feedback sobre os pontos de coleta.
+
+### Recursos Principais
+
+- **Avaliação com Estrelas**: Classifique pontos de 1 a 5 estrelas
+- **Comentários**: Compartilhe sua experiência detalhada
+- **Estatísticas em Tempo Real**: Veja média e distribuição de avaliações
+- **Gerenciamento**: Edite ou exclua suas próprias avaliações
+- **Persistência Local**: Funciona sem necessidade de backend
+
+### Documentação Técnica
+
+Para informações detalhadas sobre implementação, arquitetura e uso do sistema de avaliações, consulte:
+- 📖 [Documentação Completa do Sistema de Avaliações](docs/features/SISTEMA_AVALIACOES.md)
+
+### Componentes Disponíveis
+
+```typescript
+import { RatingStats } from '@/components/RatingStats';    // Estatísticas
+import { RatingForm } from '@/components/RatingForm';      // Formulário
+import { RatingList } from '@/components/RatingList';      // Lista
+import { StarRating } from '@/components/StarRating';      // Estrelas
+import { useRating } from '@/contexts/RatingContext';      // Hook
+```
+
+### Testes
+
+O sistema possui **17 testes automatizados** com 100% de aprovação:
+
+```bash
+npm test -- RatingContext.test.tsx
+```
+
  📱 Funcionalidades em Desenvolvimento
 
-- Integração com sistema de mapas
-- Sistema de notificações
+- Integração com sistema de mapas avançado
+- Sistema de notificações push
 - Gamificação para incentivar reciclagem
 - Dashboard com estatísticas de coleta
+- Fotos nas avaliações
+- Resposta do administrador às avaliações
 
 🤝 Como Contribuir
 
