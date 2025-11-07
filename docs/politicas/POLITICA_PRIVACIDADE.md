@@ -1,6 +1,6 @@
 # Política de Privacidade - ReciclaMuz
 
-**Última atualização**: 28 de outubro de 2025
+**Última atualização**: 07 de novembro de 2025
 
 ## 1. Introdução
 
@@ -15,7 +15,10 @@ Levamos sua privacidade muito a sério e nos comprometemos a proteger suas infor
 ## 2. Responsável pelo Tratamento de Dados
 
 **Desenvolvedor**: Equipe ReciclaMuz
-**Contato**: [Inserir e-mail de contato]
+**Líder do Projeto**: Lurian Letícia dos Reis
+**Desenvolvedores**: Anderson Henrique da Silva, Leonardo Jacon dos Reis
+**Contato**: reciclamuz@ifsudeminas.edu.br
+**Instituição**: IFSULDEMINAS - Campus Muzambinho
 **Cidade**: Muzambinho - MG, Brasil
 
 Para dúvidas sobre esta política ou sobre seus dados pessoais, entre em contato através do e-mail acima.
@@ -42,12 +45,25 @@ Coletamos automaticamente:
 
 - **Localização aproximada** (quando você usa o mapa)
 - **Histórico de interações** com pontos de coleta
-- **Avaliações e comentários** que você fizer
 - **Data e hora de acesso** ao aplicativo
 - **Tipo de dispositivo** (iOS, Android, Web)
 - **Preferências de tema** (claro/escuro)
 
 **Base Legal**: Execução de contrato e legítimo interesse (LGPD, Art. 7º, V e IX) - necessários para funcionamento do app.
+
+### 3.2.1 Dados de Avaliações
+
+Quando você avalia um ponto de coleta, coletamos:
+
+- **Classificação em estrelas** (1 a 5)
+- **Comentário escrito** por você
+- **Data e hora** da avaliação
+- **Nome de usuário** e **foto de perfil** (para exibição pública)
+- **Histórico de edições** (se você modificar sua avaliação)
+
+⚠️ **Atenção**: Suas avaliações são **públicas** e podem ser visualizadas por outros usuários do aplicativo.
+
+**Base Legal**: Consentimento explícito (LGPD, Art. 7º, I) - você autoriza ao publicar a avaliação.
 
 ### 3.3 Dados de Localização
 
@@ -82,7 +98,9 @@ Utilizamos seus dados para:
 
 2. **Funcionalidades do Aplicativo**
    - Mostrar pontos de coleta próximos a você
-   - Permitir avaliações e comentários
+   - Permitir criação, edição e exclusão de avaliações
+   - Exibir suas avaliações e comentários publicamente
+   - Calcular estatísticas de avaliações (média, distribuição)
    - Salvar seus favoritos e preferências
    - Calcular rotas até pontos de coleta
 
@@ -124,7 +142,10 @@ Compartilhamos dados apenas quando:
 
 - **Dados de autenticação**: Armazenados localmente no seu dispositivo, criptografados
 - **Dados de perfil**: Armazenados em servidores seguros (quando implementarmos backend)
+- **Avaliações e comentários**: Armazenados localmente no dispositivo via AsyncStorage
 - **Localização**: Nunca armazenada permanentemente
+
+📱 **Importante**: Atualmente, as avaliações são armazenadas apenas no seu dispositivo. Se você desinstalar o app ou limpar os dados, suas avaliações serão perdidas.
 
 ### 5.2 Medidas de Segurança
 
@@ -139,7 +160,10 @@ Implementamos:
 ### 5.3 Retenção de Dados
 
 - **Dados de autenticação**: Mantidos enquanto sua conta estiver ativa
-- **Avaliações e comentários**: Mantidos permanentemente (podem ser editados ou excluídos por você)
+- **Avaliações e comentários**:
+  - Armazenadas localmente enquanto o app estiver instalado
+  - Podem ser editadas ou excluídas por você a qualquer momento
+  - Anonimizadas se você excluir sua conta (mantém texto sem identificação)
 - **Logs de uso**: Mantidos por até 12 meses
 - **Dados excluídos**: Removidos permanentemente em até 30 dias após solicitação
 
@@ -164,9 +188,11 @@ De acordo com a LGPD, você tem direito a:
 
 Para exercer qualquer direito, entre em contato:
 
-📧 **E-mail**: [Inserir e-mail de contato]
+📧 **E-mail**: reciclamuz@ifsudeminas.edu.br
 ⏱️ **Prazo de resposta**: Até 15 dias úteis
 💰 **Custo**: Gratuito
+
+**Exclusão de avaliações**: Você pode excluir suas avaliações diretamente no app, sem necessidade de contato.
 
 ### 6.3 Exclusão de Conta
 
@@ -177,7 +203,7 @@ Você pode excluir sua conta a qualquer momento:
 3. Selecione "Excluir minha conta"
 4. Confirme a exclusão
 
-⚠️ **Atenção**: Avaliações e comentários públicos podem ser mantidos de forma anonimizada.
+⚠️ **Atenção**: Suas avaliações serão anonimizadas (texto mantido sem seu nome/foto). Isso ajuda a manter a utilidade das estatísticas para outros usuários enquanto protege sua privacidade.
 
 ---
 
@@ -263,9 +289,14 @@ Em caso de dúvidas ou reclamações sobre tratamento de dados, você pode conta
 
 Para dúvidas, solicitações ou exercer seus direitos:
 
-📧 **E-mail**: [Inserir e-mail de contato]
-📍 **Endereço**: Muzambinho - MG, Brasil
+📧 **E-mail**: reciclamuz@ifsudeminas.edu.br
+📍 **Endereço**: IFSULDEMINAS - Campus Muzambinho, Muzambinho - MG, Brasil
+👥 **Equipe**: Lurian Letícia dos Reis (Líder), Anderson Henrique da Silva, Leonardo Jacon dos Reis
 ⏱️ **Horário de atendimento**: Segunda a Sexta, 9h às 18h
+
+Para questões específicas sobre avaliações (editar, excluir, reportar):
+- Use as opções disponíveis diretamente no aplicativo
+- Em caso de dúvidas, contate-nos pelo e-mail acima
 
 ---
 
@@ -280,6 +311,36 @@ Ao utilizar o ReciclaMuz, você declara que:
 
 ---
 
+---
+
+## 15. Funcionalidades de Avaliação - Resumo
+
+### O que você pode fazer:
+✅ Avaliar pontos de coleta com 1-5 estrelas
+✅ Escrever comentários detalhados (10-500 caracteres)
+✅ Editar suas avaliações a qualquer momento
+✅ Excluir suas avaliações quando quiser
+✅ Ver estatísticas agregadas de todos os usuários
+
+### O que acontece com seus dados:
+📱 Armazenados localmente no seu dispositivo
+🔒 Criptografados e protegidos
+👀 Visíveis publicamente para outros usuários
+📊 Usados para calcular médias e estatísticas
+🗑️ Anonimizados se você excluir sua conta
+
+### Seus direitos:
+- Editar ou excluir avaliações no próprio app
+- Solicitar exclusão completa de dados
+- Revogar consentimento a qualquer momento
+- Acessar todas as suas avaliações
+
+---
+
 **ReciclaMuz** - Reciclando para um futuro melhor 🌱♻️
 
-*Versão 1.0 - Outubro de 2025*
+**Equipe**: Lurian Letícia dos Reis (Líder), Anderson Henrique da Silva, Leonardo Jacon dos Reis
+**Instituição**: IFSULDEMINAS - Campus Muzambinho
+
+*Versão 2.0 - Novembro de 2025*
+*Atualizado para incluir Sistema de Avaliações*
