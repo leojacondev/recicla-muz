@@ -98,7 +98,9 @@ Utilizamos seus dados para:
 
 2. **Funcionalidades do Aplicativo**
    - Mostrar pontos de coleta próximos a você
-   - Permitir avaliações e comentários
+   - Permitir criação, edição e exclusão de avaliações
+   - Exibir suas avaliações e comentários publicamente
+   - Calcular estatísticas de avaliações (média, distribuição)
    - Salvar seus favoritos e preferências
    - Calcular rotas até pontos de coleta
 
