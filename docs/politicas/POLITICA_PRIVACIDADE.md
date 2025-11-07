@@ -45,12 +45,25 @@ Coletamos automaticamente:
 
 - **Localização aproximada** (quando você usa o mapa)
 - **Histórico de interações** com pontos de coleta
-- **Avaliações e comentários** que você fizer
 - **Data e hora de acesso** ao aplicativo
 - **Tipo de dispositivo** (iOS, Android, Web)
 - **Preferências de tema** (claro/escuro)
 
 **Base Legal**: Execução de contrato e legítimo interesse (LGPD, Art. 7º, V e IX) - necessários para funcionamento do app.
+
+### 3.2.1 Dados de Avaliações
+
+Quando você avalia um ponto de coleta, coletamos:
+
+- **Classificação em estrelas** (1 a 5)
+- **Comentário escrito** por você
+- **Data e hora** da avaliação
+- **Nome de usuário** e **foto de perfil** (para exibição pública)
+- **Histórico de edições** (se você modificar sua avaliação)
+
+⚠️ **Atenção**: Suas avaliações são **públicas** e podem ser visualizadas por outros usuários do aplicativo.
+
+**Base Legal**: Consentimento explícito (LGPD, Art. 7º, I) - você autoriza ao publicar a avaliação.
 
 ### 3.3 Dados de Localização
 
