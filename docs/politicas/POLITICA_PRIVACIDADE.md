@@ -203,7 +203,7 @@ Você pode excluir sua conta a qualquer momento:
 3. Selecione "Excluir minha conta"
 4. Confirme a exclusão
 
-⚠️ **Atenção**: Avaliações e comentários públicos podem ser mantidos de forma anonimizada.
+⚠️ **Atenção**: Suas avaliações serão anonimizadas (texto mantido sem seu nome/foto). Isso ajuda a manter a utilidade das estatísticas para outros usuários enquanto protege sua privacidade.
 
 ---
 
