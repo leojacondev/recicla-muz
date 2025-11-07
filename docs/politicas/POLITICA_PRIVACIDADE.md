@@ -289,9 +289,14 @@ Em caso de dúvidas ou reclamações sobre tratamento de dados, você pode conta
 
 Para dúvidas, solicitações ou exercer seus direitos:
 
-📧 **E-mail**: [Inserir e-mail de contato]
-📍 **Endereço**: Muzambinho - MG, Brasil
+📧 **E-mail**: reciclamuz@ifsudeminas.edu.br
+📍 **Endereço**: IFSULDEMINAS - Campus Muzambinho, Muzambinho - MG, Brasil
+👥 **Equipe**: Lurian Letícia dos Reis (Líder), Anderson Henrique da Silva, Leonardo Jacon dos Reis
 ⏱️ **Horário de atendimento**: Segunda a Sexta, 9h às 18h
+
+Para questões específicas sobre avaliações (editar, excluir, reportar):
+- Use as opções disponíveis diretamente no aplicativo
+- Em caso de dúvidas, contate-nos pelo e-mail acima
 
 ---
 
