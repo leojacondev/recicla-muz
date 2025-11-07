@@ -311,6 +311,36 @@ Ao utilizar o ReciclaMuz, você declara que:
 
 ---
 
+---
+
+## 15. Funcionalidades de Avaliação - Resumo
+
+### O que você pode fazer:
+✅ Avaliar pontos de coleta com 1-5 estrelas
+✅ Escrever comentários detalhados (10-500 caracteres)
+✅ Editar suas avaliações a qualquer momento
+✅ Excluir suas avaliações quando quiser
+✅ Ver estatísticas agregadas de todos os usuários
+
+### O que acontece com seus dados:
+📱 Armazenados localmente no seu dispositivo
+🔒 Criptografados e protegidos
+👀 Visíveis publicamente para outros usuários
+📊 Usados para calcular médias e estatísticas
+🗑️ Anonimizados se você excluir sua conta
+
+### Seus direitos:
+- Editar ou excluir avaliações no próprio app
+- Solicitar exclusão completa de dados
+- Revogar consentimento a qualquer momento
+- Acessar todas as suas avaliações
+
+---
+
 **ReciclaMuz** - Reciclando para um futuro melhor 🌱♻️
 
-*Versão 1.0 - Outubro de 2025*
+**Equipe**: Lurian Letícia dos Reis (Líder), Anderson Henrique da Silva, Leonardo Jacon dos Reis
+**Instituição**: IFSULDEMINAS - Campus Muzambinho
+
+*Versão 2.0 - Novembro de 2025*
+*Atualizado para incluir Sistema de Avaliações*
