@@ -9,6 +9,7 @@ import 'react-native-reanimated';
 import Header from '@/components/Header';
 import { ThemeProvider, useTheme } from '@/contexts/ThemeContext';
 import { AuthProvider } from '@/contexts/AuthContext';
+import { RatingProvider } from '@/contexts/RatingContext';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 
 export {
@@ -44,7 +45,9 @@ export default function RootLayout() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <RootLayoutNav />
+        <RatingProvider>
+          <RootLayoutNav />
+        </RatingProvider>
       </AuthProvider>
     </ThemeProvider>
   );
