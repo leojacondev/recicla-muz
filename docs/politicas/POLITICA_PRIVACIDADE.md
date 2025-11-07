@@ -188,9 +188,11 @@ De acordo com a LGPD, você tem direito a:
 
 Para exercer qualquer direito, entre em contato:
 
-📧 **E-mail**: [Inserir e-mail de contato]
+📧 **E-mail**: reciclamuz@ifsudeminas.edu.br
 ⏱️ **Prazo de resposta**: Até 15 dias úteis
 💰 **Custo**: Gratuito
+
+**Exclusão de avaliações**: Você pode excluir suas avaliações diretamente no app, sem necessidade de contato.
 
 ### 6.3 Exclusão de Conta
 
