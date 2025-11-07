@@ -15,7 +15,10 @@ Levamos sua privacidade muito a sério e nos comprometemos a proteger suas infor
 ## 2. Responsável pelo Tratamento de Dados
 
 **Desenvolvedor**: Equipe ReciclaMuz
-**Contato**: [Inserir e-mail de contato]
+**Líder do Projeto**: Lurian Letícia dos Reis
+**Desenvolvedores**: Anderson Henrique da Silva, Leonardo Jacon dos Reis
+**Contato**: reciclamuz@ifsudeminas.edu.br
+**Instituição**: IFSULDEMINAS - Campus Muzambinho
 **Cidade**: Muzambinho - MG, Brasil
 
 Para dúvidas sobre esta política ou sobre seus dados pessoais, entre em contato através do e-mail acima.
