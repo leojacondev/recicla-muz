@@ -4,6 +4,12 @@ import { ScrollView, TouchableOpacity, Alert, Linking, Text, View } from 'react-
 import { Ionicons } from '@expo/vector-icons';
 import { CollectionPointsStorage, CollectionPoint, WasteTypeUtils, CollectionPointStatusUtils } from '@/services';
 import { StyleSheet } from 'react-native';
+import { RatingStats } from '../RatingStats';
+import { RatingForm } from '../RatingForm';
+import { RatingList } from '../RatingList';
+import { useRating } from '../../contexts/RatingContext';
+import { useAuth } from '../../contexts/AuthContext';
+import type { Rating } from '../../types/rating';
 
 const styles = StyleSheet.create({
   container: {
@@ -204,6 +210,11 @@ export default function CollectionPointDetails() {
   const router = useRouter();
   const [point, setPoint] = useState<CollectionPoint | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showRatingForm, setShowRatingForm] = useState(false);
+  const [editingRating, setEditingRating] = useState<Rating | null>(null);
+
+  const { getUserRatingForPoint } = useRating();
+  const { user, isAuthenticated } = useAuth();
 
   useEffect(() => {
     const loadPoint = async () => {
@@ -372,32 +383,91 @@ export default function CollectionPointDetails() {
         </View>
       )}
 
-      {/* Ratings */}
-      {point.ratings && point.ratings.length > 0 && (
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>⭐ Avaliações</Text>
-          <View style={styles.ratingHeader}>
-            <Text style={styles.averageRating}>{point.averageRating.toFixed(1)}/5</Text>
-            <Text style={styles.ratingCount}>({point.ratings.length} avaliações)</Text>
+      {/* Ratings Section */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>⭐ Avaliações</Text>
+
+        {/* Estatísticas */}
+        <RatingStats collectionPointId={id as string} showDistribution={true} />
+
+        {/* Botão de Avaliar/Editar */}
+        {isAuthenticated && (
+          <View style={{ marginTop: 16 }}>
+            {getUserRatingForPoint(id as string) ? (
+              <TouchableOpacity
+                style={{
+                  backgroundColor: '#3B82F6',
+                  padding: 12,
+                  borderRadius: 8,
+                  alignItems: 'center',
+                }}
+                onPress={() => {
+                  setEditingRating(getUserRatingForPoint(id as string));
+                  setShowRatingForm(true);
+                }}
+              >
+                <Text style={{ color: '#FFFFFF', fontWeight: '600', fontSize: 16 }}>
+                  Editar Minha Avaliação
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={{
+                  backgroundColor: '#10B981',
+                  padding: 12,
+                  borderRadius: 8,
+                  alignItems: 'center',
+                }}
+                onPress={() => {
+                  setEditingRating(null);
+                  setShowRatingForm(true);
+                }}
+              >
+                <Text style={{ color: '#FFFFFF', fontWeight: '600', fontSize: 16 }}>
+                  Avaliar Este Ponto
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
-          
-          {point.ratings.slice(0, 3).map((rating, index) => (
-            <View key={index} style={styles.ratingItem}>
-              <View style={styles.ratingStars}>
-                {Array.from({ length: 5 }, (_, i) => (
-                  <Ionicons
-                    key={i}
-                    name={i < rating.rating ? "star" : "star-outline"}
-                    size={16}
-                    color="#FFD700"
-                  />
-                ))}
-              </View>
-              {rating.comment && <Text style={styles.ratingComment}>{rating.comment}</Text>}
-            </View>
-          ))}
+        )}
+
+        {!isAuthenticated && (
+          <View style={{ marginTop: 16, padding: 12, backgroundColor: '#FEF3C7', borderRadius: 8 }}>
+            <Text style={{ color: '#92400E', fontSize: 14, textAlign: 'center' }}>
+              Faça login para avaliar este ponto de coleta
+            </Text>
+          </View>
+        )}
+
+        {/* Formulário de Avaliação */}
+        {showRatingForm && (
+          <View style={{ marginTop: 16 }}>
+            <RatingForm
+              collectionPointId={id as string}
+              existingRating={editingRating}
+              onSuccess={() => {
+                setShowRatingForm(false);
+                setEditingRating(null);
+              }}
+              onCancel={() => {
+                setShowRatingForm(false);
+                setEditingRating(null);
+              }}
+            />
+          </View>
+        )}
+
+        {/* Lista de Avaliações */}
+        <View style={{ marginTop: 16 }}>
+          <RatingList
+            collectionPointId={id as string}
+            onEditRating={(rating) => {
+              setEditingRating(rating);
+              setShowRatingForm(true);
+            }}
+          />
         </View>
-      )}
+      </View>
 
       {/* Coordinates (for debugging) */}
       <View style={styles.section}>
