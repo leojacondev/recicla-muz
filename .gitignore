@@ -68,3 +68,4 @@ coverage/
 *.claude.md
 .claudesync/
 claude_project.json
+CLAUDE.md
