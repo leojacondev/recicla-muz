@@ -1,0 +1,1 @@
+export { ScreenWithFooter } from './ScreenWithFooter';

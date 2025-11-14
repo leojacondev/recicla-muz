@@ -27,6 +27,7 @@ O ReciclaMuz é um aplicativo desenvolvido para facilitar a identificação e lo
   - Veja estatísticas e distribuição de avaliações
   - Persistência local sem necessidade de backend
 - 👨‍💼 **Painel Administrativo**: Administradores podem criar, editar e gerenciar pontos de coleta
+- 🏫 **Rodapé Institucional**: Identificação como projeto acadêmico com informações da equipe e instituição
 
 👥 Equipe
 
@@ -215,6 +216,57 @@ O sistema possui **17 testes automatizados** com 100% de aprovação:
 
 ```bash
 npm test -- RatingContext.test.tsx
+```
+
+## 🏫 Rodapé Institucional
+
+O ReciclaMuz possui um rodapé institucional que identifica o projeto como acadêmico e exibe informações da equipe e instituição.
+
+### Componentes
+
+- **Footer**: Rodapé compacto com logo, nome do projeto e botão "Sobre"
+- **AboutModal**: Modal completo com informações institucionais detalhadas
+- **ScreenWithFooter**: Wrapper para adicionar o rodapé em qualquer tela
+
+### Informações Exibidas
+
+- Logo e nome completo do IFSULDEMINAS
+- Identificação como projeto acadêmico
+- Nome do curso e departamento
+- Informações do professor orientador
+- Equipe de desenvolvimento com fotos e funções
+- Ano letivo e versão do aplicativo
+
+### Como Adicionar Imagens
+
+1. **Logo da Instituição**: Adicione em `/assets/images/ifsuldeminas-logo.png`
+2. **Fotos da Equipe**: Adicione em `/assets/images/team/`:
+   - `anderson.jpg`
+   - `leonardo.jpg`
+   - `lurian.jpg`
+3. Descomente as linhas de imagens em `constants/institutionalInfo.ts`
+
+### Uso em Telas
+
+```typescript
+import { ScreenWithFooter } from '@/components/ScreenWithFooter';
+
+export default function MyScreen() {
+  return (
+    <ScreenWithFooter>
+      {/* Conteúdo da tela */}
+    </ScreenWithFooter>
+  );
+}
+```
+
+### Testes
+
+O sistema possui **15 testes automatizados** para Footer e AboutModal:
+
+```bash
+npm test -- Footer.test.tsx
+npm test -- AboutModal.test.tsx
 ```
 
  📱 Funcionalidades em Desenvolvimento
