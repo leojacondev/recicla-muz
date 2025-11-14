@@ -29,7 +29,7 @@ export const INSTITUTIONAL_INFO: InstitutionalInfo = {
   },
 
   supervisor: {
-    name: '[NOME DO PROFESSOR]', // TODO: Adicionar nome do professor orientador
+    name: 'Hudson de Jesus Ferreira Junior',
     title: 'Prof.',
     department: 'Departamento de Tecnologia da Informação',
   },
