@@ -19,7 +19,7 @@ export const INSTITUTIONAL_INFO: InstitutionalInfo = {
   institution: {
     name: 'IFSULDEMINAS',
     fullName: 'Instituto Federal de Educação, Ciência e Tecnologia do Sul de Minas Gerais',
-    // logo: require('@/assets/images/ifsuldeminas-logo.png'), // Descomente após adicionar a logo
+    logo: require('@/assets/images/ifsuldeminas-logo.png'),
     website: 'https://portal.ifsuldeminas.edu.br',
   },
 
@@ -45,7 +45,7 @@ export const INSTITUTIONAL_INFO: InstitutionalInfo = {
       id: '2',
       name: 'Anderson Henrique da Silva',
       role: 'developer',
-      // photo: require('@/assets/images/team/anderson.jpg'), // Descomente após adicionar a foto
+      photo: require('@/assets/images/team/anderson.jpeg'),
     },
     {
       id: '3',
