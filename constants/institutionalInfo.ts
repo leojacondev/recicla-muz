@@ -31,7 +31,7 @@ export const INSTITUTIONAL_INFO: InstitutionalInfo = {
   supervisor: {
     name: 'Hudson de Jesus Ferreira Junior',
     title: 'Prof.',
-    department: 'Departamento de Tecnologia da Informação',
+    department: 'Ciência da Computação',
   },
 
   team: [
